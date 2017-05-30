@@ -405,10 +405,16 @@ the reception/transmission of behavior graph data packets.
 %\end{tikzpicture}
 	\centering
 	\subfigure[Behavior graph of a phaser ...]{
-		\includegraphics[width=0.2\textwidth]{pics/phaser.png}
+		\includegraphics[width=0.1\textwidth]{pics/phaser.png}
 	}
 	\subfigure[... whose subgraphs are allpass filters.]{
 		\includegraphics[width=0.2\textwidth]{pics/allpass.png}
+	}
+	\subfigure[The allpass filter uses a lowpass ...]{
+		\includegraphics[width=0.2\textwidth]{pics/lowpass.png}
+	}
+	\subfigure[... whose output is fed into an ideal opamp.]{
+		\includegraphics[width=0.2\textwidth]{pics/opamp.png}
 	}
 	\caption{Overview of the behavior graph used for testing.}
 	\label{fig:c3po_details}
@@ -458,11 +464,9 @@ fed into an (ideal) operational amplifier (shown in the lower right).
     \node[align=center, draw, red, very thick] (zoomed) at (2.5,0) {
     	\includegraphics[width=0.075\textwidth]{pics/whitenoise_filtered_zoom.png}
     };
-    %\draw[-, dashed, red, very thick] (0,-1.7) -- (2,-1.7);
-    \draw[-, dashed, red, very thick] (0.5,-0.75) -- (1.75,0.5);
-    %\draw[-, dashed, red, very thick] (0,-2.1) -- (2,-2.1);
-    \draw[-, dashed, red, very thick] (0.5,-1.1) -- (1.75,-0.5);
-    \draw[-, dashed, red, very thick] (0.85,-1.1) -- (3,-0.65);
+    \draw[-, dashed, red, very thick] (0.5,-0.75) -- (1.75,0.65);
+    \draw[-, dashed, red, very thick] (0.5,-1.1) -- (1.72,-0.6);
+    \draw[-, dashed, red, very thick] (0.85,-1.1) -- (3.2,-0.71);
 \end{tikzpicture}
 \caption{
 The spectra of the original white noise test signal (left) and the filtered test signal (right) over time.
