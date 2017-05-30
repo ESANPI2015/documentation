@@ -187,17 +187,13 @@ However it remains unclear if distributed operation in heterogeneous processing 
 	\hline
 	Framework        & Models & Portability & Transparency\\
 	\hline
-	ROCK             & Sensors, Actuators & CPU \& OS & Communication, Transaction\\
-	                 & & & Location, Persistence\\
-	                 & & & Failure, Resource\\                 
+	ROCK             & Sensors, Actuators & CPU \& OS & Communication, Transaction, Location, Resource\\
+	                 & & & Persistence, Failure\\
 	Behavior Graphs  &        & CPU,$\mu$C & Transaction\\
-	ADE              & Sensors, Actuators & CPU \& JVM & Communication, Transaction\\
-	                 & Resources, Topology & & Location, Persistence\\
-	                 & & & Failure, Resource\\
-	                 & & & Replication\\
-	GenoM3           &        & Depends & Depends\\
-	ROS              & Sensors, Actuators & CPU \& OS  & Communication, Transaction\\
-	                 & & & Location, Resource\\
+	ADE              & Sensors, Actuators & CPU \& JVM & Communication, Transaction, Location, Resource\\
+	                 & Resources, Topology & & Persistence, Failure, Replication\\
+	GenoM3           & & Depends & Depends\\
+	ROS              & Sensors, Actuators & CPU \& OS  & Communication, Transaction, Location, Resource\\
 	LabView          & Sensors, Actuators & CPU, FPGA  & Communication, Transaction\\
 	\end{tabular}
     \caption{
@@ -324,9 +320,9 @@ Figure \ref{fig:rover_and_model} shows a rover as a CAD model and a possible com
 There is a central node \emph{Control} of type \emph{CPU} and four joints of type \emph{FPGA},
 each connected to the central node via a point-to-point connection of \emph{NDLCom} interfaces (for details refer to \citep{2016_Zenzes}).
 
-\begin{figure}[t]
+\begin{figure*}[t]
     \centering
-    \includegraphics[width=.45\textwidth]{pics/PartAndMap.png}
+    \includegraphics[width=.9\textwidth]{pics/PartAndMap.png}
     \caption{
         The behavior graph on the left is partitioned (Nodes \emph{1,2,3} to
         Node \emph{2}) to a graph of sub-graphs in the upper right.
@@ -334,7 +330,7 @@ each connected to the central node via a point-to-point connection of \emph{NDLC
         Partitioning and mapping are dependent because the cost functions are target dependent in general.
     }
     \label{fig:PartAndMap}
-\end{figure}
+\end{figure*}
 Let the left part of figure \ref{fig:PartAndMap} be a behavior graph modelling the desired control of the presented rover.
 In order to exploit all computational resources and to keep latencies of control loops as short as possible,
 the constituents of the control have to be assigned to the processing units such that
@@ -405,13 +401,13 @@ the reception/transmission of behavior graph data packets.
 %\end{tikzpicture}
 	\centering
 	\subfigure[Behavior graph of a phaser ...]{
-		\includegraphics[width=0.1\textwidth]{pics/phaser.png}
+		\includegraphics[width=0.2\textwidth]{pics/phaser.png}
 	}
 	\subfigure[... whose subgraphs are allpass filters.]{
 		\includegraphics[width=0.2\textwidth]{pics/allpass.png}
 	}
 	\subfigure[The allpass filter uses a lowpass ...]{
-		\includegraphics[width=0.2\textwidth]{pics/lowpass.png}
+		\includegraphics[width=0.15\textwidth]{pics/lowpass.png}
 	}
 	\subfigure[... whose output is fed into an ideal opamp.]{
 		\includegraphics[width=0.2\textwidth]{pics/opamp.png}
@@ -500,6 +496,8 @@ A fundamental model would also enable the possibility of extending the different
 
 It is planned to utilize ontologies to serve as the basis for the different domains.
 This will also enable the framework to ensure certain constraints between e.g. the interconnection of devices or software components.
+
+\pagebreak
 
 \bibliographystyle{aa}
 \bibliography{References}
