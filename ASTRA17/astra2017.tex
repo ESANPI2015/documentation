@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 \usepackage{subfigure}
 
-\title{Seemless Integration of Reconfigurable Hardware into the Robotic Development Process}
+\title{Seamless Integration of Reconfigurable Hardware into the Robotic Development Process}
 \author{Moritz Schilling}
 \affil{DFKI GmbH, Robert-Hooke-Str. 5, 28359 Bremen, Germany}
 \affil{TEC-MMA, ESTEC, 2200 AG Noordwijk, The Netherlands}
@@ -28,11 +28,11 @@ Robotic systems are becoming more and more complex either in mechanical, electro
 Regarding electronic and software domain this complexity mainly arises from the composition of different, heterogeneous processing devices and their interconnections.
 How this heterogeneity in hardware can be transformed to homogeneity in the software domain has gained much attention in research - but mostly outside of the robotics community.
 As robotic systems are also distributed, heterogeneous, embedded systems the development of robot control systems will benefit from these research efforts.
-For example, the development process itself will be accelerated, the usage of ressources will be more efficient and/or the robustness of the system against failure will increase.
+For example, the development process itself will be accelerated, the usage of resources will be more efficient and/or the robustness of the system against failure will increase.
 
-While there has been much progress in unifiing the programmability of networks of heterogeneous, conventional computing devices,
-reconfigurable hardware devices (e.g. Field Programmable Gate Arrays) still have to be treated seperately.
-How such devices can be seemlessly incorporated into robotic development frameworks which have been developed to improve the re-usability of software and to ease the programming of robotic systems is the main focus of this research.
+While there has been much progress in unifying the programmability of networks of heterogeneous, conventional computing devices,
+reconfigurable hardware devices (e.g. Field Programmable Gate Arrays) still have to be treated separately.
+How such devices can be seamlessly incorporated into robotic development frameworks which have been developed to improve the re-usability of software and to ease the programming of robotic systems is the main focus of this research.
 Such a framework shall be enabled to make use of the advantages of reconfigurable hardware, while maintaining system stability, integrity and predictability.
 
 %The idea is to provide a library of reusable software components with defined functionality and interfaces such that the user only needs to group and interconnect them to setup a robotic system.
@@ -49,7 +49,7 @@ The considered frameworks have been selected either because of their popularity 
     \item[ADE] a framework from the University of Notre Dame which has been used to control the famous Nao robots\cite{Scheutz},
     %\item the Player/Stage framework from the University of Auckland which is supported and used by many robots and groups worldwide,
     %\item the Miro framework from the University of Ulm which has been used to run Pioneer robots or the B21,
-    \item[GenoM3] the Generator of Modules toolset developed at LAAS-CNRS and is used to design real-time software architectures in the robotic and space domain\cite{2015_Genom3},
+    \item[GenoM3] the Generator of Modules tool-set developed at LAAS-CNRS and is used to design real-time software architectures in the robotic and space domain\cite{2015_Genom3},
     \item[ROS] the Robot Operating System which is one of the most popular frameworks in the robotics community\cite{ROS}, and
     \item[LabView] which is not a pure robot development framework but has been used for this purpose\cite{2010_Muecke}.
 \end{description}
@@ -89,7 +89,7 @@ Transparency specifies which implementation details are hidden from the user suc
 \item[Location] transparency hides the location of a component in the system from the user,
 \item[Migration] transparency hides the relocation of components in execution from the user,
 \item[Replication] transparency hides the cloning of components from the user,
-\item[Ressource] transparency hides the ressource management from the user,
+\item[Ressource] transparency hides the resource management from the user,
 \item[Persistence] transparency ensures that the creation/destruction of components do not affect independent components,
 whereas \item[Failure] transparency hides the failure and recovery of components during execution.
 \end{description}
@@ -114,12 +114,12 @@ A detailed and formal description of these transparency concepts can be found at
 Transaction transparency is investigated in more detail with respect to the execution semantics which specifies under what conditions a component is to be executed.
 %It is closely related to the \emph{model of computation} which the framework follows.
 At the one extreme there are \emph{decidable}, \emph{deterministic} models of computation
-while on the other end there are \emph{undecidable}, \emph{nondeterministic} models.
+while on the other end there are \emph{undecidable}, \emph{non-deterministic} models.
 To get a categorization, three well-known models have been chosen:
 \begin{description}
     \item[SDF] Static Data Flow (decidable and deterministic)
     \item[KPN] Kahn Process Networks (undecidable and deterministic)
-    \item[CPN] Coloured Petri Nets (undecidable and nondeterministic)
+    \item[CPN] Coloured Petri Nets (undecidable and non-deterministic)
 \end{description}
 The execution model directly influences the possibility of verification and the expressiveness of the component networks.
 The more expressive the less verifiable such a network becomes.
@@ -133,7 +133,7 @@ Therefore there exist mechanisms to automatically recover from failure by monito
 Semantics roughly follow the KPN model; components are connected peer-to-peer through channels and are accessed by read/write functions. % Transaction Transp., Persistence Transp. because of channels
 However, the user can (but shouldn't) circumvent the KPN model because emptiness of a channel can be tested.
 ROCK uses message queues or CORBA for data transport dependent on the location of the interacting components. % Comm & Loc Transp.
-Components can be deployed to systems with conventional processing devices capable of hosting a UNIX OS. % Ressource Transp.
+Components can be deployed to systems with conventional processing devices capable of hosting a UNIX OS. % Resource Transp.
 
 Behaviour Graph components (nodes) exhibit inputs and outputs with C float type.
 The granularity of the atomic components is fine-grained; they are pure mathematical operators (like add, multiply etc.).
@@ -154,14 +154,14 @@ and component links allow components to create new components.
 Because of these properties the semantics of a component follow the CPN model in which non-determinism is allowed.
 Communication relies on registries, servers and clients and is implemented in JAVA language as well as the components itself.
 Therefore, an ADE component needs a JAVA virtual machine on top of conventional processing device (and possibly an OS).
-This virtualization and the component link mechanism provide replication transparency.
+This virtualisation and the component link mechanism provide replication transparency.
 %Although it would be possible, migration transparency is not yet a property of ADE.
 ADE also models computational structure of the system in form of virtual machines connected by communication links.
 
 A GenoM3 component consists of inputs and outputs of data types defined in the Interface Description Language of CORBA.
 Additionally, it defines events which are used e.g. to change state of the component.
 The component behaviour is directly modeled as a Petri Net; so the semantics is of the CPN domain.
-GenoM3 uses middleware templates to specify the glue code neccessary for communication, distribution etc.
+GenoM3 uses middleware templates to specify the glue code necessary for communication, distribution etc.
 Therefore, all other properties strongly depend on these templates.
 For example, a VHDL template could be developed which would enable GenoM to support reconfigurable hardware.
 However, to the knowledge of the author such templates do not yet exist.
@@ -179,7 +179,7 @@ Although LabView is not a robotic development framework of its own, it has been 
 The components of LabView follow the SDF semantics like those of the Behaviour Graph framework.
 But the available components allow much more than purely mathematical operators; there are also components which exhibit data-dependent behaviour like loops and if-then-else structures.
 LabView also provides the necessary glue code to let the components interact and it is the only framework considered here which is able to deploy them to FPGAs.
-However it remains unclear if distributed operation in heterogeneous processing networks is supported by the models and the toolchain.
+However it remains unclear if distributed operation in heterogeneous processing networks is supported by the models and the tool-chain.
 
 \begin{table*}
 	\centering
@@ -189,15 +189,15 @@ However it remains unclear if distributed operation in heterogeneous processing 
 	\hline
 	ROCK             & Sensors, Actuators & CPU \& OS & Communication, Transaction\\
 	                 & & & Location, Persistence\\
-	                 & & & Failure, Ressource\\                 
+	                 & & & Failure, Resource\\                 
 	Behavior Graphs  &        & CPU,$\mu$C & Transaction\\
 	ADE              & Sensors, Actuators & CPU \& JVM & Communication, Transaction\\
-	                 & Ressources, Topology & & Location, Persistence\\
-	                 & & & Failure, Ressource\\
+	                 & Resources, Topology & & Location, Persistence\\
+	                 & & & Failure, Resource\\
 	                 & & & Replication\\
 	GenoM3           &        & Depends & Depends\\
 	ROS              & Sensors, Actuators & CPU \& OS  & Communication, Transaction\\
-	                 & & & Location, Ressource\\
+	                 & & & Location, Resource\\
 	LabView          & Sensors, Actuators & CPU, FPGA  & Communication, Transaction\\
 	\end{tabular}
     \caption{
@@ -222,15 +222,13 @@ To be able to distribute a given application to more than one target in a proces
 To the knowledge of the author only ADE considers such a model for distributing applications.
 Furthermore, ADE allows dynamical redistribution during run-time which is a prerequisite to guarantee robustness against failures and load balancing.
 
-None of the frameworks exhibits all of the properties neccessary for the programming of heterogeneous and distributed robotic systems which are
+None of the frameworks exhibits all of the properties necessary for the programming of heterogeneous and distributed robotic systems which are
 \begin{itemize}
     \item distributed computation
     \item verifiability
     \item heterogeneous processing networks
     \item dynamic reprogramming (not reconfiguration via parameter updates)
 \end{itemize}
-
-
 
 % TODO: HERE IS SOMETHING MISSING!?!
 %\paragraph{Related Research}
@@ -294,7 +292,7 @@ None of the frameworks exhibits all of the properties neccessary for the program
 %better support of various, different processing devices - including reconfigurable hardware - found in modern robotic systems.
 
 \section{Distributed Behavior Graphs}
-The behavior graph formalism has been chosen as a first candiate to show the feasability of wholistic programming of heterogeneous robots.
+The behavior graph formalism has been chosen as a first candidate to show the feasibility of wholistic programming of heterogeneous robots.
 Because of their simplicity, the basic building blocks or atomic components are easily transferable to the FPGA-domain.
 The atomic components of the behavior graphs are
 \begin{itemize}
@@ -304,8 +302,8 @@ The atomic components of the behavior graphs are
     \item Ternary if operation (\emph{C-syntax: x = c ? a : b})
 \end{itemize}
 Through composition, more complex mathematical operators can be formed from the basic operations.
-In summary, behavior graphs follow the formalism presented before except for edges.
-Behavior graphs only support normal edges or binary hyperedges respectively.
+%In summary, behavior graphs follow the formalism presented before except for edges.
+%Behavior graphs only support normal edges or binary hyper-edges respectively.
 However, the formalism is not Turing-complete, because \emph{WHILE} loops or similar constructs can not be constructed.
 
 \begin{figure}[t]
@@ -331,34 +329,34 @@ each connected to the central node via a point-to-point connection of \emph{NDLC
     \includegraphics[width=.45\textwidth]{pics/PartAndMap.png}
     \caption{
         The behavior graph on the left is partitioned (Nodes \emph{1,2,3} to
-        Node \emph{2}) to a graph of subgraphs in the upper right.
-        One of these subgraphs has been formed for and mapped to an FPGA (Node \emph{FLJoint} in the lower right).
-        Paritioning and mapping are dependent because the cost functions are target dependent in general.
+        Node \emph{2}) to a graph of sub-graphs in the upper right.
+        One of these sub-graphs has been formed for and mapped to an FPGA (Node \emph{FLJoint} in the lower right).
+        Partitioning and mapping are dependent because the cost functions are target dependent in general.
     }
     \label{fig:PartAndMap}
 \end{figure}
 Let the left part of figure \ref{fig:PartAndMap} be a behavior graph modelling the desired control of the presented rover.
-In order to exploit all computational ressources and to keep latencies of control loops as short as possible,
+In order to exploit all computational resources and to keep latencies of control loops as short as possible,
 the constituents of the control have to be assigned to the processing units such that
 \begin{itemize}
     \item inputs and outputs in software match data sources and sinks in the hardware model,
-    \item computational ressources are shared suitably amongst the parts of the software, and
+    \item computational resources are shared suitably amongst the parts of the software, and
     \item communication between processing units is kept at a minimum.
 \end{itemize}
 These constraints are modeled by cost functions which
 \begin{enumerate}
-    \item have to be positive semidefinite,
+    \item have to be positive semi-definite,
     \item are target dependent in general, and
-    \item must not be dependent on the order in which operations have been assgined to targets.
+    \item must not be dependent on the order in which operations have been assigned to targets.
 \end{enumerate}
-Figure \ref{fig:PartAndMap} shows how a partition/subgraph (a group of software parts) is formed and mapped to an execution target.
+Figure \ref{fig:PartAndMap} shows how a partition/sub-graph (a group of software parts) is formed and mapped to an execution target.
 In this example only target-independent cost functions have been used.
-One cost function increases with the number of entering or leaving edges to/from a subgraph,
-one increases with the total number of software nodes a subgraph contains.
+One cost function increases with the number of entering or leaving edges to/from a sub-graph,
+one increases with the total number of software nodes a sub-graph contains.
 Partitioning and mapping is performed in two steps:
 the first is to find a good initial mapping, the second is to optimize this mapping if desired.
 The greedy k-way graph partitioning algorithm presented in \cite{2000_Jain} has been used to find such an initial mapping.
-Afterwards optimization algorithms can be applied which check if either the re-assigment of single nodes or the permutation of whole partitions lead to global cost reduction.
+Afterwards optimization algorithms can be applied which check if either the re-assignment of single nodes or the permutation of whole partitions lead to global cost reduction.
 % Here: Evenly distributed versus Minimal leaving/entering edges
 
 \begin{figure}[t]
@@ -377,7 +375,7 @@ This code and the routing information is used to fill source code templates whic
 
 These templates cover the instantiation of the behavior graph itself (most inner layer),
 the separation of internal and external data sources,
-the deserialization of incoming data packets and the serialization of outgoing packets,
+the de-serialization of incoming data packets and the serialization of outgoing packets,
 the triggering of the execution/evaluation of the graph (middle layer),
 the setup of all external interfaces according to the hardware model,
 the initialisation of the routing layer, and
@@ -485,16 +483,16 @@ The peaks have been highlighted by red lines.
 % Open issues
 % - fixed instruction/component set
 % - no non-determinism (at least controlled non-determinism)
-% - toolchain does not reuse previously generated stuff
-% - model domains are seperate, there is no fundamental model
+% - tool-chain does not reuse previously generated stuff
+% - model domains are separate, there is no fundamental model
 %   hosting both
 % - model domains are fixed and not easily extendable
 % - No mechanism to ensure correctness or to reason about it
 The distributed behavior graph framework is able to generate and distribute networks of simple, fixed mathematical operators to a network of distributed processing units.
-But to be useful for general purpose application aside from signal processing the instruction set itself should be adaptable either to store already generated subgraphs, to allow more powerful, possibly non-deterministic operators or multiple implementations for the same algorithm/instruction.
+But to be useful for general purpose application aside from signal processing the instruction set itself should be adaptable either to store already generated sub-graphs, to allow more powerful, possibly non-deterministic operators or multiple implementations for the same algorithm/instruction.
 
 The behavior graph model and the hardware model are based on graphs but there is no underlying model (yet) which allows both modelling domains to be easily incorporated into higher-level domains (such as the mapping domain).
-A fundamental model would also enable the possibility of extending the different views on a robotic system by e.g. adding models of the electrical wiring or the kinematical structure.
+A fundamental model would also enable the possibility of extending the different views on a robotic system by e.g. adding models of the electrical wiring or the kinematic structure.
 
 It is planned to utilize ontologies to serve as the basis for the different domains.
 This will also enable the framework to ensure certain constraints between e.g. the interconnection of devices or software components.
