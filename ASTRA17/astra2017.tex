@@ -25,9 +25,9 @@
 \section{Introduction}
 
 Robotic systems are becoming more and more complex either in mechanical, electronic or software domain.
-Regarding electronic and software domain this complexity mainly arises from the composition of different, heterogeneous processing devices and their interconnections.
+Regarding electronic and software domain this complexity mainly arises from the composition of different heterogeneous processing devices and their interconnections.
 How this heterogeneity in hardware can be transformed to homogeneity in the software domain has gained much attention in research - but mostly outside of the robotics community.
-As robotic systems are also distributed, heterogeneous, embedded systems the development of robot control systems will benefit from these research efforts.
+As robotic systems are also distributed heterogeneous embedded systems the development of robot control systems will benefit from these research efforts.
 For example, the development process itself will be accelerated, the usage of resources will be more efficient and/or the robustness of the system against failure will increase.
 
 While there has been much progress in unifying the programmability of networks of heterogeneous, conventional computing devices,
@@ -54,7 +54,7 @@ The considered frameworks have been selected either because of their popularity 
     \item[LabView] which is not a pure robot development framework but has been used for this purpose\cite{2010_Muecke}.
 \end{description}
 % NEW
-These frameworks are analysed with respect to their modelling capabilities in the relevant domains of software and computational hardware, the portability of the generated deployments which affects heterogeneity and the transparency of communication as well as transaction (cite RMODP).
+These frameworks are analysed with respect to their modelling capabilities in the relevant domains of software and computational hardware, the portability of the generated deployments which affects heterogeneity and the levels of transparency which affect the possibility to distribute a given application throughout the system.
 
 %These frameworks are analysed with respect to
 %\begin{itemize}
@@ -75,7 +75,7 @@ These frameworks are analysed with respect to their modelling capabilities in th
 \subparagraph{Modelling Capabilities}
 The frameworks are analysed with respect to their modelling capabilities of \emph{sensors}, \emph{actuators}, \emph{computational resources} and \emph{network topology}.
 These capabilities are essential for distributed systems support.
-Other important modelling capabilities like mechanical structure, kinematics etc. are neglected here.
+Other important modelling capabilities like mechanical structure, kinematics etc. are not considered here.
 
 \subparagraph{Portability}
 Because this project is about distributed, \emph{heterogeneous} systems, the frameworks have to be analysed with respect to their support of different processing devices.
@@ -103,7 +103,7 @@ A detailed and formal description of these transparency concepts can be found at
 
 \begin{figure}
     \centering
-    %\includegraphics[width=0.5\textwidth]{pics/Verification.png}
+    \includegraphics[width=0.45\textwidth]{pics/Verification.png}
     \caption{
         The relationship between verifiability and expressiveness for a selection of computational models.
         BDF stands for Boolean Dataflow and extends the SDF domain with data-dependent routing capabilities.
@@ -113,8 +113,8 @@ A detailed and formal description of these transparency concepts can be found at
 \end{figure}
 Transaction transparency is investigated in more detail with respect to the execution semantics which specifies under what conditions a component is to be executed.
 %It is closely related to the \emph{model of computation} which the framework follows.
-At the one extreme there are \emph{decidable}, \emph{deterministic} models of computation
-while on the other end there are \emph{undecidable}, \emph{non-deterministic} models.
+At the one extreme there are execution models which make the constructable applications \emph{decidable} and \emph{deterministic} 
+while on the other end there are those which make them \emph{undecidable} and \emph{non-deterministic}.
 To get a categorization, three well-known models have been chosen:
 \begin{description}
     \item[SDF] Static Data Flow (decidable and deterministic)
@@ -128,7 +128,7 @@ Figure \ref{fig:verifiability} visualizes this relationship.
 
 \subparagraph{Evaluation}
 ROCK components comprise an interface consisting of inputs, outputs and parameters (properties) with data types derived from C++ types.
-Furthermore, components have a life-cycle-state-machine whose state is published to the environment and can be controlled by the user.
+Furthermore, components have a life-cycle which is realized by a finite-state-machine whose state is published to the environment and can be controlled by the user.
 Therefore there exist mechanisms to automatically recover from failure by monitoring the state of components. % Failure Transp.
 Semantics roughly follow the KPN model; components are connected peer-to-peer through channels and are accessed by read/write functions. % Transaction Transp., Persistence Transp. because of channels
 However, the user can (but shouldn't) circumvent the KPN model because emptiness of a channel can be tested.
@@ -151,7 +151,7 @@ ADE components have four types of interface links,
 Activation links are used to exchange data between components,
 observation links pass state information to other components while process control links can change state,
 and component links allow components to create new components.
-Because of these properties the semantics of a component follow the CPN model in which non-determinism is allowed.
+Because of these dynamic properties, e.g. the creation and interconnection of compoents during run-time, the semantics of a component follow the CPN model in which non-determinism is possible.
 Communication relies on registries, servers and clients and is implemented in JAVA language as well as the components itself.
 Therefore, an ADE component needs a JAVA virtual machine on top of conventional processing device (and possibly an OS).
 This virtualisation and the component link mechanism provide replication transparency.
@@ -295,12 +295,12 @@ The atomic components of the behavior graphs are
     \item N-ary reduction operations like $\Sigma,\Pi,{||.||}_{2}$
     \item Trigonometric operations ranging from $sin(x)$ to $atan2(y,x)$
     \item Other transcendental operations like $log(x)$ and $x^y$
-    \item Ternary if operation (\emph{C-syntax: x = c ? a : b})
+    \item Ternary if operation (\emph{C-syntax: x == c ? a : b})
 \end{itemize}
 Through composition, more complex mathematical operators can be formed from the basic operations.
 %In summary, behavior graphs follow the formalism presented before except for edges.
 %Behavior graphs only support normal edges or binary hyper-edges respectively.
-However, the formalism is not Turing-complete, because \emph{WHILE} loops or similar constructs can not be constructed.
+However, the formalism is not Turing-complete, because \emph{WHILE} loops can not be constructed given the synchronous dataflow like semantics.
 
 \begin{figure}[t]
     \centering
@@ -313,7 +313,7 @@ However, the formalism is not Turing-complete, because \emph{WHILE} loops or sim
     \caption{A rover ...}
     \label{fig:rover_and_model}
 \end{figure}
-To model the robot hardware, a library for constructing and representing computational hardware graphs has been developed.
+To model the robot hardware, a library called \emph{hwgraph} for constructing and representing computational hardware as graphs has been developed.
 These hardware graphs currently support hierarchy, heterogeneity of processing elements and interfaces and point-to-point connections.
 It has been designed such that other topologies, processing elements and interfaces can be added to the model easily.
 Figure \ref{fig:rover_and_model} shows a rover as a CAD model and a possible computational infrastructure modelled with this library.
@@ -378,7 +378,7 @@ the initialisation of the routing layer, and
 the reception/transmission of behavior graph data packets.
 
 \section{Preliminary Results}
-\begin{figure}
+\begin{figure}[t]
 %\begin{tikzpicture}
 %    \node[align=center] (phaser) at (0,1.25) {
 %        \includegraphics[width=0.25\textwidth]{pics/phaser.png}
@@ -400,43 +400,43 @@ the reception/transmission of behavior graph data packets.
 %    \draw[-, very thick, red] (8,2) -- (12,-2);
 %\end{tikzpicture}
 	\centering
-	\subfigure[Behavior graph of a phaser ...]{
+	\subfigure[Behavior graph of a phaser.]{
 		\includegraphics[width=0.2\textwidth]{pics/phaser.png}
 	}
-	\subfigure[... whose subgraphs are allpass filters.]{
+	\subfigure[The subgraphs are allpass filters.]{
 		\includegraphics[width=0.2\textwidth]{pics/allpass.png}
 	}
 	\subfigure[The allpass filter uses a lowpass ...]{
 		\includegraphics[width=0.15\textwidth]{pics/lowpass.png}
 	}
-	\subfigure[... whose output is fed into an ideal opamp.]{
+	\subfigure[... and an ideal opamp.]{
 		\includegraphics[width=0.2\textwidth]{pics/opamp.png}
 	}
 	\caption{Overview of the behavior graph used for testing.}
 	\label{fig:c3po_details}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t]
 \begin{tikzpicture}
     \node[align=center] (spine) at (-2,0) {
     	\includegraphics[width=0.2\textwidth]{pics/SpineBoard.jpg}
     };
-    \node[align=center] (mdaq2) at (-2,-2.5) {
+    \node[align=center] (mdaq2) at (-2,-2) {
     	\includegraphics[width=0.2\textwidth]{pics/MDAQ2.png}
     };
-    \node[align=center] (graph) at (2,-1.25) {
+    \node[align=center] (graph) at (2,-1) {
     	\includegraphics[width=0.25\textwidth]{pics/demo.png}
     };
 \end{tikzpicture}
 \caption{
 The hardware setup for the preliminary tests
-consisting of a standard x86, an Xilinx Spartan6 based and an ARM7 based PCB connected in series.
+consisting of a standard x86 PC (not shown explicitely), an Xilinx Spartan6 based and an ARM7 based PCB connected in series.
 }
 \label{fig:prelim_hw_arch}
 \end{figure}
 
-The first experiments have been performed using a conventional x86-based personal computer,
-a Xilinx Spartan6 based and a ARM7 based printed circuit board (PCB) which have been interconnected in a chain.
+The first experiments have been performed using a conventional x86-based personal computer (PC),
+a Xilinx Spartan6 based and a ARM7 based printed circuit board (PCB) which are interconnected in a chain.
 Figure \ref{fig:prelim_hw_arch} shows photographs of the PCBs and the device interconnection.
 The edges denote communication links for data exchange via the NDLCom protocol which has been developed by DFKI
 and is used in various robotic systems.
@@ -450,25 +450,28 @@ the audio input is split into a lowpass (shown in the upper right) filtered and 
 fed into an (ideal) operational amplifier (shown in the lower right).
 
 \begin{figure}
-\begin{tikzpicture}
-    \node[align=center] (undistorted) at (-2,0) {
-    	\includegraphics[width=0.225\textwidth]{pics/whitenoise_orig.png}
-    };
-    \node[align=center] (distorted) at (2,0) {
-    	\includegraphics[width=0.225\textwidth]{pics/whitenoise_filtered.png}
-    };
-    \node[align=center, draw, red, very thick] (zoomed) at (2.5,0) {
-    	\includegraphics[width=0.075\textwidth]{pics/whitenoise_filtered_zoom.png}
-    };
-    \draw[-, dashed, red, very thick] (0.5,-0.75) -- (1.75,0.65);
-    \draw[-, dashed, red, very thick] (0.5,-1.1) -- (1.72,-0.6);
-    \draw[-, dashed, red, very thick] (0.85,-1.1) -- (3.2,-0.71);
-\end{tikzpicture}
-\caption{
-The spectra of the original white noise test signal (left) and the filtered test signal (right) over time.
-In the filtered signal the peaks of the transfer function can be observed for signals below 5 kHz.
-}
-\label{fig:prelim_results}
+	\centering
+	\subfigure[Spectrum of original white noise test signal]{
+    	\includegraphics[width=0.45\textwidth]{pics/whitenoise_orig.png}
+	}
+	\subfigure[Spectrum of filtered signal]{
+        \begin{tikzpicture}
+            \node[align=center] (distorted) at (2,0) {
+                \includegraphics[width=0.45\textwidth]{pics/whitenoise_filtered.png}
+            };
+            \node[align=center, draw, red, very thick] (zoomed) at (2.5,0) {
+                \includegraphics[width=0.15\textwidth]{pics/whitenoise_filtered_zoom.png}
+            };
+            \draw[-, dashed, red, very thick] (-1.0,-1.5) -- (1.0,1.3);
+            \draw[-, dashed, red, very thick] (-1.0,-2.2) -- (1.0,-1.4);
+            \draw[-, dashed, red, very thick] (-0.3,-2.2) -- (4.0,-1.4);
+        \end{tikzpicture}
+	}
+    \caption{
+    Spectra of original and filtered signal over time.
+    In the filtered signal the peaks of the transfer function can be observed for signals below 5 kHz.
+    }
+    \label{fig:prelim_results}
 \end{figure}
 
 To find out about the transfer function of the network,
@@ -478,7 +481,7 @@ Figure \ref{fig:prelim_results} is showing, that this can be observed in the fre
 The left figure represents the spectrum of the undistorted white noise, while the right shows the filtered signal.
 The peaks have been highlighted by red lines.
 
-\section{Outlook}
+\section{Conclusions \& Outlook}
 % Refer to hypergraphs, ontologies etc.
 % Open issues
 % - fixed instruction/component set
@@ -497,7 +500,7 @@ A fundamental model would also enable the possibility of extending the different
 It is planned to utilize ontologies to serve as the basis for the different domains.
 This will also enable the framework to ensure certain constraints between e.g. the interconnection of devices or software components.
 
-\pagebreak
+%\pagebreak
 
 \bibliographystyle{aa}
 \bibliography{References}
