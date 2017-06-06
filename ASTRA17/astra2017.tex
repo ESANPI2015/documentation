@@ -355,20 +355,24 @@ The greedy k-way graph partitioning algorithm presented in \cite{2000_Jain} has 
 Afterwards optimization algorithms can be applied which check if either the re-assignment of single nodes or the permutation of whole partitions lead to global cost reduction.
 % Here: Evenly distributed versus Minimal leaving/entering edges
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=.45\textwidth]{pics/Workflow.png}
-    \caption{
-        The workflow for distributing behavior graphs starts with the specification of the hardware and the desired control software and
-        ends with sets of source code files ready to be deployed to the system's execution units.
-    }
-    \label{fig:Workflow}
-\end{figure}
-The complete workflow - from specification of the hardware and the software to the generation of deployments for each execution unit - is shown in figure \ref{fig:Workflow}.
-According to this specification, a partitioning and mapping of the behavior graph to the execution units of the system is generated.
-Each partition (stored in a \emph{*.bsg} file) is then passed to a generator which produces either \emph{C} code or \emph{VHDL} code.
-This code and the routing information is used to fill source code templates which are then compiled or synthesized respectively.
-
+% REVIEW: Suggested by MA to either remove or simplify this.
+%\begin{figure}[t]
+%    \centering
+%    \includegraphics[width=.45\textwidth]{pics/Workflow.png}
+%    \caption{
+%        The workflow for distributing behavior graphs starts with the specification of the hardware and the desired control software and
+%        ends with sets of source code files ready to be deployed to the system's execution units.
+%    }
+%    \label{fig:Workflow}
+%\end{figure}
+%The complete workflow - from specification of the hardware and the software to the generation of deployments for each execution unit - is shown in figure \ref{fig:Workflow}.
+%According to this specification, a partitioning and mapping of the behavior graph to the execution units of the system is generated.
+%Each partition (stored in a \emph{*.bsg} file) is then passed to a generator which produces either \emph{C} code or \emph{VHDL} code.
+%This code and the routing information is used to fill source code templates which are then compiled or synthesized respectively.
+Given a behavior graph and a hardware graph the mentioned algorithm produces a sub-graph for each execution unit - these contain all the nodes which are about to be executed on the same device.
+The resulting mapping and the different types of the execution units are then used by a code generator to either produce \emph{C} code for conventional targets or \emph{VHDL} code for FPGAs.
+The generated code as well as routing tables for the communication layer are stored in a dictionary.
+Source code templates for different devices are then filled with the information from the dictionary.
 These templates cover the instantiation of the behavior graph itself (most inner layer),
 the separation of internal and external data sources,
 the de-serialization of incoming data packets and the serialization of outgoing packets,
