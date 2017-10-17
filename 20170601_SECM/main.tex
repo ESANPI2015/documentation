@@ -1,0 +1,220 @@
+\documentclass[pdf]
+{beamer}
+\mode<presentation>{}
+%% preamble
+
+\usepackage{ulem}
+%\usepackage{gantt}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{shapes}
+
+% Declare background layer
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+
+\title[ESTEC June 2017]
+{
+    \textbf{Modelling with Hypergraphs}
+}
+\author{Moritz Schilling}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+%% INTRO %%
+
+\begin{frame}{Motivation}
+    %WHAT DO YOU WANT TO DO AND WHY?
+	\centering
+	\input{intro.tex}
+\end{frame}
+
+\begin{frame}{Motivation}
+    %WHAT DO YOU WANT TO DO AND WHY?
+	\centering
+	\input{workflow.tex}
+\end{frame}
+
+%% THEORY %%
+
+\begin{frame}{Hypergraph}
+    \begin{description}
+        \item[Graph] consists of nodes and edges connecting \emph{two} nodes with eachother.
+        \item[Hypergraph] consists of nodes and hyperedges connecting \emph{arbitrary many} nodes with eachother.
+        \item[Generalized] hypergraph consists of hyperedges connecting other hyperedges as well.
+    \end{description}
+\end{frame}
+
+\begin{frame}{Conceptual Graphs}
+    \begin{description}
+        \item[Concept] represents things like classes, elements, objects etc.
+        \item[Relation] encodes the semantics between different concepts.
+    \end{description}
+    \begin{itemize}
+        \item Encoding concepts as nodes and relation as edges ($Cat - isA \to Animal$)
+        \item For N-ary relations you want hyperedges ($Cat - isA \to Animal, Pet$)
+        \item For relations over relations you want generalized hyperedges ($X - follows* \to Y, follows* - by \to Car$) 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchy}
+	\begin{itemize}
+		\item $(* \to *')$ labelled hyperedge $*$ pointing to other hyperedge $*'$
+		\item $(Concept \to *)$ $*$ represents a concept
+		\item $(Relation \to *)$ $*$ represents a relation
+		\item $(A - R \to B)$ $A$ is $R$-related to $B$
+		\item Domain specification (Domain of Animals)
+		\item Class specification ($Dog - isA \to Animal$)
+		\item Object specification ($Bello - instanceOf \to Dog$)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Domain Overview}
+    % TODO: Here a nice pic on the right would be nice?
+    \begin{itemize}
+        \item Generalized Hypergraph
+        \item Concept Graph
+        \item Common Concept Graph
+        \item Hardware Domain Graph
+        \begin{itemize}
+            \item Computational Hardware
+            \item Electronics
+            \item Mechanics/Kinematics
+        \end{itemize}
+        \item Software Domain Graph
+        \begin{itemize}
+            \item Behaviors
+            \item Algorithms
+            \item Implementations
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Implementation}
+    \begin{description}
+    \item[Hyperedge] as an id, a string and a vector of sets of unique ids (incidence list)
+    \item[Hypergraph] as a list of hyperedges belonging to that graph
+    \item[Concept Graph] as having two predefined hyperedges encoding \emph{concepts} and \emph{relations}
+    \item[Common Concept Graph] defining predefined relations for
+        \begin{itemize}
+        \item type hierarchies (also for relations!) %IS-A, SUBREL-OF
+        \item individuals \& facts % INSTANCE-OF, FACT-OF
+        \item aggregation %HAS-A
+        \item composition %PART-OF
+        \item topology %CONNECTS
+        \end{itemize}
+    \end{description}
+\end{frame}
+
+\begin{frame}{Algorithm Domain}
+	\centering
+	\input{software.tex}
+\end{frame}
+
+\begin{frame}{Algorithm Class}
+	\centering
+	\input{software2.tex}
+\end{frame}
+
+\begin{frame}{Algorithm Network}
+	\centering
+	\input{depthmap.tex}
+\end{frame}
+
+%% RESULTS %%
+
+\begin{frame}{HypergraphGUI}
+    \centering
+    \includegraphics[width=\textwidth]{pics/HypergraphGUI.png}
+\end{frame}
+
+% Insert
+% * Common Concept Graph Viz
+\begin{frame}{Different Visualization}
+    \begin{columns}
+    	\begin{column}{.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/HardwareGraph.png}
+    	\end{column}
+    	\begin{column}{.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/HardwareGraphInterpreted.png}
+    	\end{column}
+    \end{columns}
+\end{frame}
+
+% * Skeleton generators
+% * Insert pattern matching
+\begin{frame}{Pattern Matching}
+    \centering
+    \includegraphics[width=\textwidth]{pics/QueryGraphModified.png}
+\end{frame}
+
+
+%%% SUMMARY & OUTLOOK %%%
+
+\begin{frame}{Status}
+    \begin{columns}
+    	\begin{column}{.5\textwidth}
+    		\begin{itemize}
+    		\item[+] Generalized hypergraph library
+    			\begin{itemize}
+    			\item[+] Import/export from/to YAML
+    			\item[+] Unique identifier handling
+    			\item[+] Hyperedge operators (union,intersect,subtract)
+    			\item[+] Hypergraph operators (union)
+    			\end{itemize}
+            \item[+] Common relation definition
+    		\item[+] Hypergraph GUI to build/load/store hypergraphs
+            \item[+] Graph traversal for transitive closure
+            \item[+] Pattern matching for queries
+    		\end{itemize}
+    	\end{column}
+    	\begin{column}{.5\textwidth}
+    		\begin{itemize}
+            \item[-] Domain specification rules
+    			\begin{itemize}
+                \item[-] Positive/negative matches
+                \item[-] Graph rewriting
+    			\end{itemize}
+            \item[-] Missing domains
+    			\begin{itemize}
+                \item[-] Electrical domain
+                \item[-] Mechanical domain
+                %\item[-] Implementation domain
+                %\item[-] Algorithm $\cup$ Implementation
+                \item[-] Device $\cup$ Implementation
+                \item[-] Algorithm $\cup$ Device
+    			\end{itemize}
+    		\item[-] Feature complete generators and workflow
+    		\end{itemize}
+    	\end{column}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}{Outlook}
+    \begin{itemize}
+    \item Domain specification rules using pattern matching and conditional graph rewriting\\
+          Idea: Positive Match m, Negative Match n: If $m \cap n = \emptyset$, apply rule to transform $m \to m^{'}$
+    \item Feature complete generators for e.g. skeleton code\\
+          Basic implementations exist already
+    \item Database backend for storage/retrieval\\
+          Idea: YAML + GIT, BerkeleyDB
+    \item Tools to build deployments
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+    \begin{center}
+        \huge
+        Thank you. Any questions?
+    \end{center}
+\end{frame}
+
+\end{document}

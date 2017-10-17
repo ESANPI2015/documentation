@@ -1,0 +1,36 @@
+\begin{tikzpicture}[remember picture]
+		\node[draw, align=center] (DepthMap) at (0,0) {
+			DepthMap
+		};
+        \node[draw, align=center] (Algorithm) at (0,2) {
+            Algorithm
+        };
+        \node[draw, align=center] (left) at (-3,-2) {
+        	left
+        };
+        \node[draw, align=center] (right) at (0,-2) {
+        	right
+        };
+        \node[draw, align=center] (dem) at (3,-2) {
+        	dem
+        };
+        \node[draw, align=center] (Input) at (-3,-4) {
+        	Input
+        };
+        \node[draw, align=center] (Output) at (3,-4) {
+        	Output
+        };
+        \node[draw] (Interface) at (0,-4) {
+        	image
+        };
+        \draw[->] (DepthMap) to node[fill=white] { is } (Algorithm);
+        \draw[->] (DepthMap) to node[fill=white] { needs } (left);
+        \draw[->] (DepthMap) to node[fill=white] { needs } (right);
+        \draw[->] (DepthMap) to node[fill=white] { provides } (dem);
+        \draw[->] (left) to node[fill=white] {is} (Input);
+        \draw[->] (right) to node[fill=white] {is} (Input);
+        \draw[->] (dem) to node[fill=white] {is} (Output);
+        \draw[->] (left) to node[fill=white] {is} (Interface);
+        \draw[->] (right) to node[fill=white] {is} (Interface);
+        \draw[->] (dem) to node[fill=white] {is} (Interface);
+\end{tikzpicture}

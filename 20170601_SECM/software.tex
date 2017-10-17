@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+        \node[draw, align=center] (Algorithm) at (0,3) {
+            Algorithm
+        };
+        \node[draw, align=center] (Interface) at (0,-1) {
+            Interface
+        };
+        \node[draw, align=center] (Input) at (-3,-3) {
+            Input
+        };
+        \node[draw, align=center] (Output) at (3,-3) {
+            Output
+        };
+        \draw[->] (Algorithm) to node[fill=white] {
+            $has^{>0}$
+        } (Interface);
+        \draw[->] (Algorithm) to node[fill=white] {
+            $needs^{\geq 0}$
+        } (Input);
+        \draw[->] (Algorithm) to node[fill=white] {
+            $provides^{\geq 0}$
+        } (Output);
+        \draw[->] (Input) to node[fill=white] {
+            $is$
+        } (Interface);
+        \draw[->] (Output) to node[fill=white] {
+            $is$
+        } (Interface);
+        \draw[->] (Input) to node[fill=white] {
+            ${dependsOn^{\leq 1}}$
+        } (Output);
+\end{tikzpicture}
