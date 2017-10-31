@@ -13,9 +13,9 @@
 \pgfdeclarelayer{bg}
 \pgfsetlayers{bg,main}
 
-\title[ESTEC June 2017]
+\title[ESTEC 2017]
 {
-    \textbf{Modelling with Hypergraphs}
+    \textbf{Using Concept Graphs for Modelling Robotic Systems}
 }
 \author{Moritz Schilling}
 \date{\today}
@@ -28,10 +28,23 @@
 
 %% INTRO %%
 
-\begin{frame}{Motivation}
-    %WHAT DO YOU WANT TO DO AND WHY?
-	\centering
-	\input{intro.tex}
+\begin{frame}{Different Views on a Robotic System}
+    % Processors & Communication Links
+    \only<1>{
+    \begin{center}
+    \input{tex/intro.tex}
+    \end{center}
+    }
+    % Joints & Links/Bodies
+    \only<2>{
+    \begin{center}
+    \input{tex/intro2.tex}
+    \end{center}
+    }
+\end{frame}
+\begin{frame}{DROCK}
+    \centering
+    \includegraphics[width=.9\textwidth]{pics/circle.pdf}
 \end{frame}
 
 \begin{frame}{Motivation}
@@ -42,12 +55,20 @@
 
 %% THEORY %%
 
-\begin{frame}{Hypergraph}
-    \begin{description}
-        \item[Graph] consists of nodes and edges connecting \emph{two} nodes with eachother.
-        \item[Hypergraph] consists of nodes and hyperedges connecting \emph{arbitrary many} nodes with eachother.
-        \item[Generalized] hypergraph consists of hyperedges connecting other hyperedges as well.
-    \end{description}
+\begin{frame}{Generalized Hypergraph}
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			\begin{description}
+			\item[Graph] Two nodes can be connected by an edge
+			\item[Hypergraph] An edge can connect arbitrary many nodes
+			\item[Generalized Hypergraph] An edge can also point to another edge
+			\end{description}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\input{hyperedge.tex}
+			% Nodes are just special 0-Hyperedges!
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}{Conceptual Graphs}
@@ -62,17 +83,6 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Hierarchy}
-	\begin{itemize}
-		\item $(* \to *')$ labelled hyperedge $*$ pointing to other hyperedge $*'$
-		\item $(Concept \to *)$ $*$ represents a concept
-		\item $(Relation \to *)$ $*$ represents a relation
-		\item $(A - R \to B)$ $A$ is $R$-related to $B$
-		\item Domain specification (Domain of Animals)
-		\item Class specification ($Dog - isA \to Animal$)
-		\item Object specification ($Bello - instanceOf \to Dog$)
-	\end{itemize}
-\end{frame}
 
 \begin{frame}{Domain Overview}
     % TODO: Here a nice pic on the right would be nice?
@@ -125,6 +135,19 @@
 	\centering
 	\input{depthmap.tex}
 \end{frame}
+
+%\begin{frame}{Hierarchy}
+%	\begin{itemize}
+%		\item $(* \to *')$ labelled hyperedge $*$ pointing to other hyperedge $*'$
+%		\item $(Concept \to *)$ $*$ represents a concept
+%		\item $(Relation \to *)$ $*$ represents a relation
+%		\item $(A - R \to B)$ $A$ is $R$-related to $B$
+%		\item Domain specification (Domain of Animals)
+%		\item Class specification ($Dog - isA \to Animal$)
+%		\item Object specification ($Bello - instanceOf \to Dog$)
+%	\end{itemize}
+%\end{frame}
+
 
 %% RESULTS %%
 

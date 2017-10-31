@@ -1,0 +1,67 @@
+\begin{tikzpicture}
+    \node[align=center] (ROBO) at (0,0) {
+        \includegraphics[width=\textwidth]{pics/Charlie.png}
+    };
+
+    % Highlight x86
+    \node[align=center, fill=red, circle, inner sep=0pt, minimum size=2mm] (X86) at (1.5,2) {
+    };
+
+    % Highlight uC
+    \node[align=center, fill=blue, inner sep=0pt, minimum size=2mm] (UC1) at (-2.2,-2.2) {
+    };
+    %\node[align=center, fill=blue, inner sep=0pt, minimum size=2mm] (UC2) at (-2.8,-1.5) {
+    %};
+    \node[align=center, fill=blue, inner sep=0pt, minimum size=2mm] (UC3) at (-0.6,-1.4) {
+    };
+    %\node[align=center, fill=blue, inner sep=0pt, minimum size=2mm] (UC4) at (2.3,-1) {
+    %};
+    %\node[align=center, fill=blue, inner sep=0pt, minimum size=2mm] (UC5) at (-1.1,1.3) {
+    %};
+
+    % Highlight FPGA
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA1) at (1,2) {
+    };
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA2) at (0.7,1.9) {
+    };
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA3) at (1.2,1.2) {
+    };
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA4) at (-1,0.2) {
+    };
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA21) at (-2,1.7) {
+    };
+	\node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA22) at (-2.4,1.6) {
+    };
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA23) at (-3,1.4) {
+    };
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA24) at (-1.5,-0.3) {
+    };
+    \node[align=center, fill=olive, diamond, inner sep=0pt, minimum size=3mm] (FPGA25) at (-2,-1) {
+    };
+    
+    % Connections
+    \draw[-, thick] (X86) -- (FPGA1) -- (FPGA2) -- (FPGA3) -- (FPGA4) -- (UC3);
+   	\draw[-, thick] (X86) -- (FPGA21) -- (FPGA22) -- (FPGA23) -- (FPGA24) -- (FPGA25) -- (UC1);
+
+    % Legend
+    %\node[align=center, red] (LX86) at (5,4) {
+    %    x86
+    %};
+    %\draw[->, red] (LX86) -| (X86);
+    %\node[align=center, blue] (LUC) at (5,-3) {
+    %    $\mu$C
+    %};
+    %\draw[->, blue] (LUC) -| (UC1);
+    %\draw[->, blue] (LUC) -| (UC2);
+    %\draw[->, blue] (LUC) -| (UC3);
+    %\draw[->, blue] (LUC) -| (UC4);
+    %\draw[->, blue] (LUC) -| (UC5);
+    %\node[align=center, olive] (LFPGA) at (-5,4) {
+    %    FPGA
+    %};
+    %\draw[->, olive] (LFPGA) |- (FPGA1);
+    %\draw[->, olive] (LFPGA) |- (FPGA2);
+    %\draw[->, olive] (LFPGA) |- (FPGA3);
+    %\draw[->, olive] (LFPGA) |- (FPGA4);
+
+\end{tikzpicture}
